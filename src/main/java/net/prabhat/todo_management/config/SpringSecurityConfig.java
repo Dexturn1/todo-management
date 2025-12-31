@@ -2,6 +2,7 @@ package net.prabhat.todo_management.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -25,6 +26,14 @@ public class SpringSecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
+
+                .authorizeHttpRequests(auth->{
+                    auth.requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("ADMIN","USER");
+                   // auth.requestMatchers(HttpMethod.GET,"/api/**").permitAll(); this exposes out rest API to all
+                })
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().authenticated()
                 )
