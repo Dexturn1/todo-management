@@ -28,14 +28,14 @@ public class TodoController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER'")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodo(@PathVariable Long id){
         TodoDto todoDto = todoService.getTodo(id);
         return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER'")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping()
     public ResponseEntity<List<TodoDto>> getAllTodo(){
         List<TodoDto> todos = todoService.getAllTodo();
@@ -56,14 +56,14 @@ public class TodoController {
         return ResponseEntity.ok("Todo has Has been deleted Successfully! ");
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER'")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("/{id}/complete")
     public ResponseEntity<TodoDto> completeTodo(@PathVariable Long id){
         TodoDto todoDto = todoService.completeTodo(id);
         return ResponseEntity.ok(todoDto);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER'")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("/{id}/inComplete")
     public ResponseEntity<TodoDto> inCompleteTodo(@PathVariable Long id){
         TodoDto todoDto = todoService.inComplete(id);
